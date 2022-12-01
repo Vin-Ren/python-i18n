@@ -4,6 +4,7 @@ from .translator import t
 from .translations import add as add_translation
 from . import config
 from .config import set, get
+from .translator_group import TranslatorGroup
 
 resource_loader.init_loaders()
 
