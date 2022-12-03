@@ -3,7 +3,8 @@ from . import config
 container = {}
 
 def reset():
-    container=dict()
+    container.clear()
+
 
 def add(key, value, locale=config.get('locale')):
     container.setdefault(locale, {})[key] = value

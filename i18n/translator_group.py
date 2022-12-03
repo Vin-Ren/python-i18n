@@ -1,4 +1,5 @@
 from .config import get
+from .translations import container as translations_container
 from .translator import t
 
 
@@ -19,3 +20,13 @@ class TranslatorGroup:
     
     def __getitem__(self, key):
         return t(self.TRANSLATION_FORMAT.format(**self.data, key=key), **self.data)
+    
+    def reset(self, all_locale=False):
+        """Resets all of the accessible translations of this TranslatorGroup."""
+        accessible_prefix=self.TRANSLATION_FORMAT.format(**self.data, key='')
+        
+        for locale in translations_container:
+            if (locale==self.locale) or all_locale:
+                for key in list(translations_container[locale]):
+                    if key.startswith(accessible_prefix):
+                        translations_container[locale].pop(key)
